@@ -26,7 +26,7 @@ docker run --gpus all \
 + `--quantize` : 預設為None，量化模型，提供以下兩種選擇
     - `bitsandbytes` : 等同於load_in_8bit
     - `bitsandbytes-nf4` : 等同於load_in_4bit並使用nf4
-+ `--use_flash_attention` : 預設為False，是否啟用flash_attention_2
++ `--use_flash_attention` : 預設為False，是否啟用flash_attention_2，啟動後速度會快很多
 + `--retrieve_k` : 預設為3，檢索的文章數量
 ## 測試
 透過以下code進行測試
