@@ -11,7 +11,7 @@ URL = "https://github.com/NCHU-NLP-Lab/demeterchain"
 DOWNLOAD_URL = "https://pypi.org/project/demeterchain/"
  
 LICENSE = "MIT"
-VERSION = "1.0.0"
+VERSION = "1.0.2"
 DESCRIPTION = "A set of data tools in Python"
 LONG_DESCRIPTION = (HERE / "README.md").read_text(encoding="utf8")
 LONG_DESC_TYPE = "text/markdown"

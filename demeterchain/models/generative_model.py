@@ -58,7 +58,8 @@ class GenerativeModel(BaseModel):
         """
         model_kargs ={
             "device_map" : config.device_map,
-            "torch_dtype" : config.dtype
+            "torch_dtype" : config.dtype,
+            "cache_dir" : config.cache_dir
         }
 
         if config.use_flash_attention:
@@ -183,8 +184,8 @@ class GenerativeModel(BaseModel):
             ) 
 
         # ignore empty document and concate doc_prefix and doc
-        doc_contents = [doc.page_content for doc in docs]
-        doc_contents = list(filter(lambda doc:len(doc)>0, doc_contents))
+        non_empty_docs = list(filter(lambda doc:len(doc.page_content)>0, docs))
+        doc_contents = [doc.page_content for doc in non_empty_docs]
         prompts = [doc_prefix + doc for doc in doc_contents]
         doc_postfix = [doc_postfix] * len(prompts)
 
@@ -243,5 +244,5 @@ class GenerativeModel(BaseModel):
                 answer = (answer.replace(" ", "")).replace("。", "")
                 # not choose an existing answer
                 if answer not in answer_docs:
-                    answer_docs[answer] = docs[i + j//num_return_sequences]
+                    answer_docs[answer] = non_empty_docs[i + j//num_return_sequences]
         return answer_docs

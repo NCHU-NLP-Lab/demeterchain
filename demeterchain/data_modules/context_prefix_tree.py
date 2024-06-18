@@ -9,11 +9,8 @@ class ContextPrefixTree(object):
     """
 
     prefix_tree = None 
-    # prefix tree
     input_len = 0 
-    # prompt length, it can help differentiate between input and output
     eos_token_id = 2 
-    # end of sequence
 
     def __init__(self, eos_token_id: int):
         self.eos_token_id = eos_token_id

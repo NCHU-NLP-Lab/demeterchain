@@ -19,12 +19,13 @@ class QAModelConfig(object):
         template (Union[PromptTemplate, MessageTemplate]): template used by the model.
         device_map (str, defaults to `auto`): The device on which the model will be placed
         dtype (Union[str, torch.dtype], defaults to torch.float16): dtype used by the model
-        quantize (Optional[str], defaults to `bitsandbytes`): 
+        quantize (Optional[str], defaults to `None`): 
             The quantification method used by the model.
             Can be either:
                 - bitsandbytes: `LLM.int8()`
                 - bitsandbytes-nf4: `NF4`
         use_flash_attention (bool, defaults to `False`): Whether to enable flash_attention_2.
+        cache_dir (Optional[str], defaults to `None`): Path to a directory in which a downloaded pretrained model configuration should be cached if the standard cache should not be used.
         noanswer_str (Optional[str], defaults to `None`): String which let the model decide whether to ignore the document. 
         noanswer_ids (Optional[List[int]], defaults to `None`): tokenized String which let the model decide whether to ignore the document. 
     """
@@ -39,6 +40,7 @@ class QAModelConfig(object):
         dtype: Union[str, torch.dtype] = torch.float16,
         quantize: Optional[str] = None,
         use_flash_attention: bool = False,
+        cache_dir: Optional[str] = None,
         noanswer_str: Optional[str] = None,
         noanswer_ids: Optional[List[int]] = None,
     ):
@@ -46,6 +48,7 @@ class QAModelConfig(object):
         self.template=template
         self.device_map=device_map
         self.use_flash_attention = use_flash_attention
+        self.cache_dir = cache_dir
         self.noanswer_str=noanswer_str
         self.noanswer_ids=noanswer_ids
 
@@ -68,6 +71,7 @@ class QAModelConfig(object):
             f"device_map={self.device_map}, "
             f"dtype={self.dtype}, "
             f"use_flash_attention={self.use_flash_attention}, "
+            f"cache_dir={self.cache_dir}, "
             f"noanswer_str={self.noanswer_ids}, "
             f"template={self.template}"
             f")")
